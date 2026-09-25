@@ -126,18 +126,13 @@ func _show_scene() -> void:
 	_clear()
 	title_label.text="CRIME SCENE"
 	status_label.text="KEY CLUES %d / %d" % [found_evidence.size(),current_case.required_evidence.size()]
-	content.add_child(_label("Search all eight objects. Five contain decisive evidence; three are distractions.",15))
-	var grid:=GridContainer.new()
-	grid.columns=4
-	grid.size_flags_vertical=Control.SIZE_EXPAND_FILL
-	grid.add_theme_constant_override("h_separation",10)
-	grid.add_theme_constant_override("v_separation",10)
-	content.add_child(grid)
-	for item in current_case.evidence:
-		var id:String=item.id
-		var b:=_button(("[FOUND] " if found_evidence.has(id) else "[INSPECT] ")+item.name,Callable(self,"_inspect").bind(id))
-		b.disabled=found_evidence.has(id)
-		grid.add_child(b)
+	content.add_child(_label("Search the room yourself. Highlighted objects can be inspected; some are distractions.",13))
+	scene_view=preload("res://scripts/crime_scene.gd").instantiate()
+	scene_view.custom_minimum_size=Vector2(0,420)
+	scene_view.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	scene_view.setup(current_case.evidence)
+	scene_view.hotspot_clicked.connect(_inspect)
+	content.add_child(scene_view)
 	var row:=HBoxContainer.new()
 	content.add_child(row)
 	row.add_child(_button("EVIDENCE BOARD",Callable(self,"_show_board")))
