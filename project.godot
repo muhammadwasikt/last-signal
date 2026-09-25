@@ -1,14 +1,14 @@
-; Last Signal
+; CASEFILE: LAST SCENE
 ; Godot 4.7.2 stable
 
 config_version=5
 
 [application]
-config/name="Last Signal"
-config/description="A tactical survival shooter where death becomes an intelligence role."
+config/name="Casefile: Last Scene"
+config/description="A hidden-object detective mystery game built around investigation, evidence, interrogation and deduction."
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-boot_splash/bg_color=Color(0.035, 0.047, 0.061, 1)
+boot_splash/bg_color=Color(0.035, 0.043, 0.055, 1)
 
 [display]
 window/size/viewport_width=1280
@@ -18,11 +18,10 @@ window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
 [rendering]
-textures/vram_compression/import_etc2_astc=true
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.025, 0.033, 0.045, 1)
-textures/default_filters/use_nearest_mipmap_filter=false
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.025, 0.031, 0.041, 1)
 
 [gui]
 theme/default_font_multichannel_signed_distance_field=true
