@@ -1,79 +1,101 @@
-# Last Signal — Game Plan
+# Casefile: Last Scene — Game Plan
 
 ## Product thesis
 
-Build a battle-royale/extraction-inspired shooter where information has direct gameplay value and player death changes role instead of ending participation.
+Build a detective mystery game around a real reasoning loop:
 
-## Core loop
+SEARCH → DISCOVER → ANALYZE → CONNECT → INTERROGATE → DEDUCE → ACCUSE
 
-1. Deploy.
-2. Search and fight.
-3. Recover intelligence caches.
-4. Learn the battlefield through partial information.
-5. Extract before elimination.
-6. If eliminated, transition to Signal Mode.
-7. Ping/relay intelligence to surviving squad members.
-8. Earn progression and cosmetics.
+Every player-facing control must execute real game state. No fake completion screens or placeholder wins.
 
-## Differentiators
+## Long-term scale
 
-### Death becomes Signal
-An eliminated player becomes a limited intelligence agent. No shooting or direct damage.
+The case system has a 1000-case progression boundary and is data-driven so new cases can be authored without rewriting the engine.
 
-### Information is loot
-Intel caches and discovered tactical information are first-class resources.
+A case is not considered playable until its scene, evidence, suspects, dialogue, deductions and outcome logic exist.
 
-### Living battlefield
-Later versions let squads manipulate power, cameras, gates, bridges and communications.
+## Case model
 
-### Non-traditional endgame
-The final phase is extraction-driven rather than only a shrinking-zone gunfight.
+A case can contain:
 
-## MVP online roadmap
+- briefing
+- victim
+- crime scene
+- searchable objects
+- decisive evidence
+- distractions/red herrings
+- evidence details
+- suspects and alibis
+- interrogation questions
+- evidence-backed contradictions
+- culprit
+- motive
+- method
+- required proof
+- result states
+- rewards
+- unlock rules
 
-### Phase 1 — Vertical slice
-- One map
-- 16 simulated combatants
-- Core shooting
-- Intel + extraction
-- Signal Mode
-- Android/Web controls
+## Progression
 
-### Phase 2 — Real multiplayer
-- Dedicated authoritative server
-- 8–16 players
-- Match/session service
-- Snapshot interpolation
-- Server-side hit validation
-- reconnect flow
+- 1–3 stars
+- XP
+- detective rank
+- investigation streak
+- case unlocking
+- persistent local save
+- evidence archive
 
-### Phase 3 — 24–40 player matches
-- squad parties
-- matchmaking
-- anti-cheat telemetry
-- dynamic battlefield systems
-- replay/event capture
+## Current vertical slice
+
+### Case 001 — The Locked Apartment
+
+Implemented as an actual playable investigation with:
+
+- 8 searchable objects
+- 5 decisive clues
+- 3 distractions
+- 3 suspects
+- 3 interrogation topics
+- evidence challenges
+- final accusation
+- perfect/partial/failure outcomes
+- XP, stars, streak and next-case progression
+
+## Next phases
+
+### Phase 2 — Investigation UX
+- visual crime-scene composition
+- real object hotspots
+- zoom/pan
+- clue inspection animation
+- multi-evidence deductions
+- richer dialogue
+- mobile-first investigation controls
+
+### Phase 3 — Content pipeline
+- Case 002
+- Cases 003–010
+- case-data validator
+- reusable scene system
+- chapter progression
+- unique case assets
 
 ### Phase 4 — Retention
-- account progression
-- operator cosmetics
-- seasons
-- weekly battlefield state
-- challenge missions
-- ranked/stat surfaces
+- daily mystery
+- weekly special investigation
+- achievements
+- detective profile expansion
+- case collections
+- streak rewards
 
-### Phase 5 — Monetization
-- battle pass
-- cosmetic store
-- rewarded ads where appropriate
-- no pay-to-win weapons or combat stats
+### Phase 5 — 1000+ production
+- 1000+ fully authored investigations
+- escalating difficulty
+- multi-location cases
+- long-form story arcs
+- automated content validation
 
-## Architecture
+## Quality rule
 
-One Godot client serves Android and Web. Future services remain outside the client: matchmaking, authoritative game server, identity, profile, telemetry and payments.
-
-Never trust the client for damage, loot ownership, match results or progression.
-
-## Economy
-
-Sell expression, not power: operator cosmetics, weapon cosmetics, vehicle cosmetics, signal effects, banners, emotes and season pass.
+No dummy buttons, fake counters, automatic wins, or placeholder case completion.
