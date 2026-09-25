@@ -78,7 +78,7 @@ func _physics_process(delta: float) -> void:
     fire_cooldown = max(0.0, fire_cooldown - delta)
     var keyboard_x := (1.0 if (Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT)) else 0.0) - (1.0 if (Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_LEFT)) else 0.0)
     var keyboard_y := (1.0 if (Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_UP)) else 0.0) - (1.0 if (Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_DOWN)) else 0.0)
-    var input_vec := Vector2(keyboard_x + float(mobile_right) - float(mobile_left), keyboard_y + float(mobile_forward) - float(mobile_back)).limit_length(1.0)
+    var input_vec: Vector2 = Vector2(keyboard_x + float(mobile_right) - float(mobile_left), keyboard_y + float(mobile_forward) - float(mobile_back)).limit_length(1.0)
     if mobile_turn_left: rotate_y(2.1 * delta)
     if mobile_turn_right: rotate_y(-2.1 * delta)
     var forward := -global_transform.basis.z
@@ -140,7 +140,7 @@ func _signal_ping(screen_pos: Vector2) -> void:
     var ray_dir := camera.project_ray_normal(screen_pos)
     var query := PhysicsRayQueryParameters3D.create(ray_origin, ray_origin + ray_dir * 80.0)
     var hit := get_world_3d().direct_space_state.intersect_ray(query)
-    var marker_pos := hit.position if hit else global_position + ray_dir * 30.0
+    var marker_pos: Vector3 = (hit.position as Vector3) if hit and hit.has("position") else global_position + ray_dir * 30.0
     _spawn_ping(marker_pos)
     if game.hud: game.hud.call("toast", "SIGNAL PING • INTEL TRANSMITTED")
 
