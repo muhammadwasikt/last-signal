@@ -1,45 +1,51 @@
 # Roadmap
 
-## Sprint 01 — Playable slice
-- [x] Project foundation
-- [x] 3D arena generation
-- [x] Player movement
-- [x] Shooting
-- [x] Enemy AI
-- [x] Intel pickup
-- [x] Extraction zone
-- [x] Signal transition
-- [x] Signal ping
-- [x] Mobile virtual controls
+## Sprint 01 — Detective foundation
+- [x] Replace shooter main loop
+- [x] Case database
+- [x] 1000-case progression boundary
+- [x] Persistent save
+- [x] XP/rank/stars/streak
+- [x] Case Files
+- [x] Case 001 briefing
+- [x] Hidden-object search
+- [x] Evidence board
+- [x] Suspect interrogation
+- [x] Evidence contradictions
+- [x] Final accusation
+- [x] Multiple outcomes
 
-## Sprint 02 — Feel and presentation
-- [ ] recoil
-- [ ] muzzle flash
-- [ ] hit markers
-- [ ] weapon reload
-- [ ] footsteps
-- [ ] damage audio
-- [ ] better lighting
-- [ ] production props
-- [ ] polished touch UX
+## Sprint 02 — Production investigation UX
+- [ ] Visual crime-scene composition
+- [ ] Real object hotspots
+- [ ] Zoom/pan inspection
+- [ ] Clue inspection animation
+- [ ] Evidence linking
+- [ ] Timeline reconstruction
+- [ ] Rich dialogue presentation
+- [ ] Mobile-first investigation controls
 
-## Sprint 03 — Network prototype
-- [ ] authoritative server
-- [ ] session join
-- [ ] 8-player room
-- [ ] server hit validation
-- [ ] latency compensation
+## Sprint 03 — Content pipeline
+- [ ] Case 002 fully authored
+- [ ] Cases 003–010 fully authored
+- [ ] Case-data validator
+- [ ] Reusable crime-scene system
+- [ ] Chapter progression
+- [ ] Unique case assets
 
-## Sprint 04 — Social/retention
-- [ ] squad party
-- [ ] profile
-- [ ] progression
-- [ ] match history
-- [ ] Signal contribution stats
-- [ ] weekly event
+## Sprint 04 — Retention
+- [ ] Daily mystery
+- [ ] Weekly special case
+- [ ] Achievements
+- [ ] Detective profile expansion
+- [ ] Case collections
+- [ ] Streak rewards
 
-## Sprint 05 — Monetization
-- [ ] cosmetics inventory
-- [ ] battle pass
-- [ ] rewarded-ad hooks
-- [ ] platform purchase layer
+## Sprint 05 — 1000+ case production
+- [ ] 1000+ fully authored investigations
+- [ ] Escalating difficulty
+- [ ] Multi-location cases
+- [ ] Long-form story arcs
+- [ ] Automated content validation
+
+A feature is complete only when it executes real game logic.
