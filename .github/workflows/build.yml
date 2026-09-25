@@ -9,6 +9,8 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 env:
   GODOT_VERSION: "4.7.2"
@@ -56,6 +58,23 @@ jobs:
         with:
           name: last-signal-web
           path: build/web
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+  deploy-web:
+    name: Deploy Web to GitHub Pages
+    needs: web
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   android:
     name: Build Android APK
