@@ -218,50 +218,65 @@ func _show_accusation() -> void:
 	_clear()
 	title_label.text="BUILD YOUR CASE"
 	status_label.text="FINAL DEDUCTION"
-	content.add_child(_label("Your accusation is checked against the actual case solution. No automatic win.",15))
+	content.add_child(_label("Every selection must be supported by the investigation. Choose the conclusion that best fits the recovered evidence.",15))
 	var culprit:=OptionButton.new()
-	for s in current_case.suspects: culprit.add_item(s.name)
+	for s in current_case.suspects:
+		culprit.add_item(s.name)
 	content.add_child(_label("CULPRIT",14))
 	content.add_child(culprit)
 	var motive:=OptionButton.new()
-	motive.add_item("Financial dispute")
-	motive.add_item("Personal revenge")
-	motive.add_item("Fear of exposure")
+	for value in current_case.motive_options:
+		motive.add_item(value)
 	content.add_child(_label("MOTIVE",14))
 	content.add_child(motive)
 	var method:=OptionButton.new()
-	method.add_item("Poison")
-	method.add_item("Blunt force")
-	method.add_item("Strangulation")
+	for value in current_case.method_options:
+		method.add_item(value)
 	content.add_child(_label("METHOD",14))
 	content.add_child(method)
 	var evidence:=OptionButton.new()
 	for x in current_case.evidence:
-		if found_evidence.has(x.id): evidence.add_item(x.name)
+		if found_evidence.has(x.id):
+			evidence.add_item(x.name)
 	content.add_child(_label("KEY EVIDENCE",14))
 	content.add_child(evidence)
 	content.add_child(_button("SUBMIT ACCUSATION",Callable(self,"_submit").bind(culprit,motive,method,evidence)))
-	content.add_child(_button("BACK",Callable(self,"_show_board")))
+	content.add_child(_button("BACK TO INVESTIGATION",Callable(self,"_show_board")))
 
 func _submit(culprit:OptionButton,motive:OptionButton,method:OptionButton,evidence:OptionButton)->void:
 	if evidence.item_count==0:
-		_show_result(false,0,"Insufficient evidence. A detective cannot make a supported accusation yet.")
+		_show_result(false,0,"INSUFFICIENT EVIDENCE. Recover at least one decisive clue before accusing.")
 		return
-	var c:=culprit.get_item_text(culprit.selected)=="Evelyn Cross"
-	var m:=motive.get_item_text(motive.selected)=="Financial dispute"
-	var me:=method.get_item_text(method.selected)=="Poison"
-	var ev:=false
-	for x in current_case.required_evidence:
-		if _evidence_name(x)==evidence.get_item_text(evidence.selected):
-			ev=true
+	var selected_culprit:=culprit.get_item_text(culprit.selected)
+	var selected_motive:=motive.get_item_text(motive.selected)
+	var selected_method:=method.get_item_text(method.selected)
+	var selected_evidence:=evidence.get_item_text(evidence.selected)
+	var culprit_ok:=selected_culprit==str(current_case.culprit)
+	var motive_ok:=selected_motive==_motive_label(current_case.motive)
+	var method_ok:=selected_method==_method_label(current_case.method)
+	var proof_ok:=false
+	for id in current_case.required_evidence:
+		if _evidence_name(id)==selected_evidence:
+			proof_ok=true
 			break
-	var score:=int(c)+int(m)+int(me)+int(ev)
+	var score:=int(culprit_ok)+int(motive_ok)+int(method_ok)+int(proof_ok)
 	if score==4 and found_evidence.size()==current_case.required_evidence.size():
-		_show_result(true,3,"PERFECT SOLUTION. The locked-room setup, financial motive and poisoning method are supported by the recovered evidence.")
-	elif c and ev:
-		_show_result(true,2,"CASE SOLVED. You identified the culprit and supported the accusation, but the deduction was incomplete.")
+		_show_result(true,3,"PERFECT SOLUTION. Every major deduction is supported by the complete evidence chain.")
+	elif culprit_ok and proof_ok:
+		_show_result(true,2,"CASE SOLVED. The culprit and supporting proof are correct, but the deduction is incomplete.")
 	else:
-		_show_result(false,0,"WRONG ACCUSATION. The selected conclusion does not match the evidence.")
+		_show_result(false,0,"WRONG ACCUSATION. Recheck the timeline, access, motive and forensic evidence.")
+
+func _motive_label(text:String)->String:
+	if text.contains("Gambling"): return "Gambling debt"
+	if text.contains("Insurance"): return "Insurance fraud"
+	if text.contains("Blackmail"): return "Blackmail"
+	if text.contains("Corporate"): return "Corporate embezzlement"
+	return text
+
+func _method_label(text:String)->String:
+	if text.begins_with("Evelyn"): return "Poison"
+	return text
 
 func _show_result(won:bool,stars:int,message:String)->void:
 	_clear()
@@ -319,9 +334,11 @@ func _show_case_files()->void:
 	content.add_child(_button("BACK",Callable(self,"_show_main_menu")))
 
 func _open_case(id:int)->void:
-	if id==1:
-		profile.unlocked_case=max(int(profile.unlocked_case),id)
-		_start_case()
+	if id <= int(profile.unlocked_case) and not DB.get_case(id).is_empty():
+		current_case=DB.get_case(id)
+		found_evidence.clear()
+		challenged.clear()
+		_show_briefing()
 	else:
 		_show_locked(id)
 
