@@ -1,41 +1,36 @@
-# Last Signal
+# Casefile: Last Scene
 
-**Last Signal** is a cross-platform tactical survival shooter prototype where death changes your role into SIGNAL, an intelligence agent.
+A cross-platform detective mystery game for Web and Android.
 
-## Platforms
+## Core loop
 
-One Godot project targets Android, Web and desktop development.
+SEARCH → DISCOVER → ANALYZE → INTERROGATE → DEDUCE → ACCUSE → WIN → UNLOCK
 
-## Current slice
+The project has pivoted from the old tactical-shooter prototype to a real investigation game.
 
-- 3D tactical arena
-- third-person movement
-- hitscan shooting
-- hostile raiders
-- intelligence caches
-- extraction objective
-- Signal Mode after elimination
-- Signal pings
-- responsive HUD
-- touch controls on touchscreen builds
+## Implemented now
 
-## Controls
+- Data-driven case architecture
+- 1000-case progression boundary
+- Persistent local save
+- Case unlock state
+- XP, detective ranks, stars and streak
+- Case Files screen
+- Hidden-object investigation
+- Evidence collection
+- Evidence board
+- Suspect interrogation
+- Evidence-backed contradiction challenges
+- Final culprit/motive/method accusation
+- Perfect, partial and failed outcomes
+- Replayable Case 001
 
-### Desktop/Web
-- WASD / Arrow keys: move
-- Mouse: aim
-- Left mouse / Space: fire
-- Q: signal ping after elimination
+## Case 001 — The Locked Apartment
 
-### Android/Web touch
-- on-screen movement and turn controls
-- FIRE button
-- PING button during Signal Mode
+A complete playable investigation containing 8 searchable objects, 5 decisive clues, 3 distractions, 3 suspects, 3 interrogation topics, contradiction logic, final deduction and progression rewards.
 
-## Run
+Cases beyond Case 001 are intentionally not marked playable until their actual investigation content exists.
 
-Open the folder in Godot 4.7.x and press Play. Use Project → Export to create Web or Android builds from the same project.
+## Build
 
-## Status
-
-This is a playable vertical slice, not yet the online multiplayer release. Authoritative networking, matchmaking, accounts, persistence, production assets, analytics and monetization are planned next.
+Godot 4.7.2. GitHub Actions builds Web and Android APK from the same project.
