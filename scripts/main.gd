@@ -8,6 +8,7 @@ var found_evidence: Dictionary = {}
 var challenged: Dictionary = {}
 var screen: Control
 var content: VBoxContainer
+var scene_view: Control
 var title_label: Label
 var status_label: Label
 var toast_label: Label
